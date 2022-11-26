@@ -1,0 +1,23 @@
+packages: 
+  board: !include packages/board_esp01_1m.yaml
+  base_components: !include packages/esp_home_components.yaml
+
+logger:
+  baud_rate: 0
+  level: DEBUG
+
+uart:
+  rx_pin: GPIO3
+  tx_pin: GPIO1
+  baud_rate: 9600
+
+tuya:
+
+light:
+  - platform: "tuya"
+    name: "${pretty_name} Dimmer"
+    dimmer_datapoint: 2
+    min_value_datapoint: 3
+    switch_datapoint: 1
+    min_value: 150
+    max_value: 1000

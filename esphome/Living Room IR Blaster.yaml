@@ -1,0 +1,8 @@
+packages:
+  base: !include common/sparkfun_wifi_ir_blaster.yaml
+  base_components: !include common/packages/esp_home_components.yaml
+
+substitutions:
+  device_name: "living-room-ir-blaster"
+  pretty_name: "Living Room IR Blaster"
+  ui_name: "${pretty_name}"

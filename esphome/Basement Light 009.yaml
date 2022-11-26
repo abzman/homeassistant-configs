@@ -1,0 +1,8 @@
+packages: 
+  package: !include common/sonoff_basic_light.yaml
+
+substitutions:
+  device_name: "basement-light-009"
+  pretty_name: "Basement Light 009"
+  ui_name: "Basement Light 009"
+  icon: "mdi:lghtbulb"

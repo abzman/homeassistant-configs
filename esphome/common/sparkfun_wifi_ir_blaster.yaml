@@ -1,0 +1,24 @@
+packages: 
+  board: !include packages/board_esp12f.yaml
+  base_components: !include packages/esp_home_components.yaml
+
+remote_transmitter:
+  pin: 4
+  carrier_duty_percent: 50%
+
+remote_receiver:
+  pin: 13
+  dump: all
+
+status_led:
+  pin:
+    number: 5
+    inverted: False
+
+binary_sensor:
+  - name: "${pretty_name} Button"
+    platform: gpio
+    pin:
+      number: 0
+      mode: INPUT_PULLUP
+      inverted: True

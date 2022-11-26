@@ -1,0 +1,8 @@
+packages:
+  package: !include common/treatlife_ss01s_light.yaml
+
+substitutions:
+  device_name: "kitchen-sink-lightswitch"
+  pretty_name: "Kitchen Sink Lightswitch"
+  ui_name: "Kitchen Sink Light"
+  icon: "mdi:lghtbulb"

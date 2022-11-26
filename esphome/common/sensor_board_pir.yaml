@@ -1,0 +1,5 @@
+binary_sensor:
+  - platform: gpio
+    pin: GPIO13
+    name: "${pretty_name} Motion"
+    device_class: motion

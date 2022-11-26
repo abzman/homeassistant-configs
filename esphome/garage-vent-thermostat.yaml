@@ -1,0 +1,8 @@
+packages:
+  package: !include common/treatlife_ss01s_switch.yaml
+
+substitutions:
+  device_name: "garage-vent-thermostat"
+  pretty_name: "Garage Vent Thermostat"
+  ui_name: "Garage Vent Thermostat"
+  icon: "mdi:thermometer"

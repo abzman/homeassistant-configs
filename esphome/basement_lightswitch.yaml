@@ -1,0 +1,10 @@
+packages:
+  package: !include common/button_box_6_long_press.yaml
+
+
+substitutions:
+  device_name: "basement-lightswitch"
+  pretty_name: "Basement Lightswitch"
+  target_1: "group.basement_lights_left"
+  target_2: "group.basement_lights_right"
+  target_3: "group.basement_lights_workbench"

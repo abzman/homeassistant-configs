@@ -1,0 +1,17 @@
+packages:
+  package: !include athom-rgbct-bulb.yaml
+  den: !include packages/den_wifi.yaml
+
+substitutions:
+  device_name: "foyer-bulb-${num}"
+  pretty_name: "Foyer Bulb ${num}"
+  light_restore_mode: RESTORE_DEFAULT_ON
+  color_interlock: "true"
+
+esphome:
+  on_boot:
+    then:
+      - light.control:
+          id: light_1
+          brightness: 80%
+          color_temperature: 440 mireds

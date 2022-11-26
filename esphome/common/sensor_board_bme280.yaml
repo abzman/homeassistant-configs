@@ -1,0 +1,11 @@
+sensor:
+  - platform: bme280
+    temperature:
+      name: "${pretty_name} Temperature"
+      oversampling: 16x
+    pressure:
+      name: "${pretty_name} Pressure"
+    humidity:
+      name: "${pretty_name} Humidity"
+    address: 0x76
+    update_interval: 10s

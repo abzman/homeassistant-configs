@@ -1,0 +1,7 @@
+# https://www.esphome-devices.com/devices/ESP32-CAM
+esphome:
+  name: "${device_name}"
+  build_path: "./build/${device_name}"
+
+esp32:
+  board: esp32dev

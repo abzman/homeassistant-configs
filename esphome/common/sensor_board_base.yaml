@@ -1,0 +1,7 @@
+packages:
+  board: !include packages/board_esp12f.yaml
+  base_components: !include packages/esp_home_components.yaml
+
+i2c:
+  sda: 4
+  scl: 5

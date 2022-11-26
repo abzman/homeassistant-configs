@@ -1,0 +1,8 @@
+packages:
+  package: !include common/treatlife_ss01s_light.yaml
+
+substitutions:
+  device_name: "side-door-light"
+  pretty_name: "Side Door Light"
+  ui_name: "Side Door Light"
+  icon: "mdi:lghtbulb"

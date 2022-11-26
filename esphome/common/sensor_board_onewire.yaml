@@ -1,0 +1,8 @@
+dallas:
+  - pin: GPIO12
+
+# Individual sensors
+sensor:
+  - platform: dallas
+    index: 0
+    name: "${pretty_name} Onewire Temperature"

@@ -1,0 +1,8 @@
+packages: 
+  package: !include common/sonoff_basic_switch.yaml
+
+substitutions:
+  device_name: "air-compressor-silencer"
+  pretty_name: "Air Compressor Silencer"
+  ui_name: "${pretty_name}"
+  icon: "mdi:engine"

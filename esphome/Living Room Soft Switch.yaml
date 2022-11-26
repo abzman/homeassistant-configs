@@ -1,0 +1,31 @@
+packages: 
+  board: !include common/packages/board_esp01_1m.yaml
+  base_components: !include common/packages/esp_home_components.yaml
+
+binary_sensor:
+  - name: "${pretty_name} Button"
+    platform: gpio
+    pin:
+      number: 13
+      mode: INPUT_PULLUP
+      inverted: True
+
+status_led:
+  pin:
+    number: 5
+    inverted: True
+
+switch:
+  - name: "${pretty_name} LED"
+    id: power_led
+    platform: gpio
+    pin:
+      number: 4
+      inverted: False
+    internal: False
+
+substitutions:
+  device_name: "living-room-soft-switch"
+  pretty_name: "Living Room Soft Switch"
+  ui_name: "Living Room Soft Switch"
+  icon: "mdi:lghtbulb"

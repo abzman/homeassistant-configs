@@ -1,0 +1,10 @@
+packages: 
+  package: !include packages/treatlife_ss01s_base.yaml
+
+binary_sensor:
+  - name: "${pretty_name} Button"
+    platform: gpio
+    pin:
+      number: 13
+      mode: INPUT_PULLUP
+      inverted: True

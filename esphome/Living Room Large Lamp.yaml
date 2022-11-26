@@ -1,0 +1,8 @@
+packages: 
+  package: !include common/sonoff_basic_light.yaml
+
+substitutions:
+  device_name: "living-room-large-lamp"
+  pretty_name: "Living Room Large Lamp"
+  ui_name: "Living Room Large Lamp"
+  icon: "mdi:lghtbulb"

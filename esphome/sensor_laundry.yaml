@@ -1,0 +1,37 @@
+packages:
+  base: !include common/sensor_board_base.yaml
+  base_components: !include common/packages/esp_home_components.yaml
+substitutions:
+  device_name: "sensor-laundry"
+  pretty_name: "Laundry Sensor"
+  ui_name: "${pretty_name}"
+
+ads1115:
+  - address: 0x48
+
+sensor:
+- platform: ads1115
+  multiplexer: 'A0_GND'
+  gain: 6.144
+  #name: "A0_GND_VOLTS"
+  id: "A0thing"
+- platform: ads1115
+  multiplexer: 'A1_GND'
+  gain: 6.144
+  #name: "A1_GND_VOLTS"
+  id: "A1thing"
+- platform: ads1115
+  multiplexer: 'A2_GND'
+  gain: 6.144
+  #name: "A2_GND_VOLTS"
+  id: "A2thing"
+- platform: template
+  name: "Dryer Current"
+  lambda: return ((id(A2thing).state-.00206)*6.857);
+  update_interval: 10s
+  unit_of_measurement: Amps
+- platform: template
+  name: "Washer Current"
+  lambda: return ((id(A1thing).state-.002438)*6.857);
+  update_interval: 10s
+  unit_of_measurement: Amps

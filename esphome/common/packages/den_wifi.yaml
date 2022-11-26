@@ -1,0 +1,5 @@
+wifi:
+  networks:
+    - ssid: !secret den_wifi_ssid
+      password: !secret den_wifi_pass
+      priority: 5.0

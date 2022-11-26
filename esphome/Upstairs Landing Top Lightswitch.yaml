@@ -1,0 +1,8 @@
+packages:
+  package: !include common/treatlife_3way_ss01.yaml
+
+substitutions:
+  device_name: "upstairs-landing-top-light"
+  pretty_name: "Upstairs Landing Top Lightswitch"
+  ui_name: "Upstairs Landing Light"
+  icon: "mdi:lghtbulb"

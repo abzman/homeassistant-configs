@@ -1,0 +1,13 @@
+# The dimmer slider for this light will have a quirk in the Home Assistant UI
+# where the slider doesn't go below the min_value. To fix this, there's a
+# Template Light based on this entity with remapped brightness values.
+# See '../lights/living)room_sconce_dimmer_template.yaml'
+
+packages:
+  package: !include common/treatlife_ds01_dimmer.yaml
+
+substitutions:
+  device_name: "living_room_sconce_lightswitch"
+  pretty_name: "Living Room Sconces"
+  ui_name: "Living Room Sconces"
+  icon: "mdi:lghtbulb"

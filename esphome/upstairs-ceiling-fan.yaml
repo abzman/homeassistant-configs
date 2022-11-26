@@ -1,0 +1,26 @@
+packages: 
+  board: !include common/packages/board_esp12f.yaml
+  base_components: !include common/packages/esp_home_components.yaml
+
+substitutions:
+  device_name: "upstairs-ceiling-fan"
+  pretty_name: "Upstairs Ceiling Fan"
+  ui_name: "${pretty_name}"
+  icon: "mdi:fan"
+
+logger:
+  baud_rate: 0
+
+uart:
+  rx_pin: GPIO3
+  tx_pin: GPIO1
+  baud_rate: 115200
+
+tuya:
+
+fan:
+  - platform: "tuya"
+    name: Treatlife DS02F Speed
+    switch_datapoint: 1
+    speed_datapoint: 3
+    speed_count: 4

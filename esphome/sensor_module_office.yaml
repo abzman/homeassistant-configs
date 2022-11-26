@@ -1,0 +1,11 @@
+packages:
+  base: !include common/sensor_board_base.yaml
+  base_components: !include common/packages/esp_home_components.yaml
+  bme: !include common/sensor_board_bme280.yaml
+  lux: !include common/sensor_board_lux.yaml
+  pir: !include common/sensor_board_pir.yaml
+
+substitutions:
+  device_name: "sensor-module-office"
+  pretty_name: "Office Atmosphere Sensor"
+  ui_name: "${pretty_name}"

@@ -1,0 +1,8 @@
+packages:
+  package: !include common/treatlife_ss01s_light.yaml
+
+substitutions:
+  device_name: "outside-garage-lights"
+  pretty_name: "Outside Garage Lights"
+  ui_name: "Outside Garage Lights"
+  icon: "mdi:lghtbulb"

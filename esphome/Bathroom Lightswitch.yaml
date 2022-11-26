@@ -1,0 +1,8 @@
+packages:
+  package: !include common/treatlife_ss01s_light.yaml
+
+substitutions:
+  device_name: "bathroom-lightswitch"
+  pretty_name: "Bathroom Lightswitch"
+  ui_name: "Bathroom Light"
+  icon: "mdi:lghtbulb"

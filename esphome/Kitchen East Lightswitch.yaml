@@ -1,0 +1,8 @@
+packages:
+  package: !include common/treatlife_3way_ss01.yaml
+
+substitutions:
+  device_name: "kitchen-east-lightswitch"
+  pretty_name: "Kitchen East Lightswitch"
+  ui_name: "Kitchen Lightswitch"
+  icon: "mdi:lghtbulb"

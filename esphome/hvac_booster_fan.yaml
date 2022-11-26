@@ -1,0 +1,6 @@
+packages:
+  package: !include common/robotdyn_ac_dimmer_vent_fan.yaml
+
+substitutions:
+  device_name: "hvac-booster-fan"
+  pretty_name: "HVAC Booster Fan"

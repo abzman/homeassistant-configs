@@ -1,0 +1,8 @@
+packages:
+  package: !include common/treatlife_ss01s_switch.yaml
+
+substitutions:
+  device_name: "garage-vent-override"
+  pretty_name: "Garage Vent Override"
+  ui_name: "Garage Vent Override"
+  icon: "mdi:fan"
