@@ -1,0 +1,143 @@
+# For https://abzman2k.wordpress.com/2023/12/14/esp32-button-led-board-esphome/
+# If you want to integrate the buttons with homeassistant services,
+# uncomment the on_press: sections, fill in the correct service
+# (i.e. homeassistant.turn_on/turn_off/toggle) and add target_1-12
+# to the substitutions in your device file
+
+packages:
+  board: !include packages/board_esp32_wrooom.yaml
+  base_components: !include packages/esp_home_components.yaml
+
+binary_sensor:
+  - name: "${pretty_name} Button 1"
+    platform: gpio
+    pin:
+      number: 4
+      mode: INPUT_PULLUP
+      inverted: True
+    # on_press:
+    #   - homeassistant.service:
+    #       service: homeassistant.turn_on
+    #       data:
+    #         entity_id: "${target_1}"
+  - name: "${pretty_name} Button 2"
+    platform: gpio
+    pin:
+      number: 5
+      mode: INPUT_PULLUP
+      inverted: True
+    # on_press:
+    #   - homeassistant.service:
+    #       service: homeassistant.turn_on
+    #       data:
+    #         entity_id: "${target_2}"
+  - name: "${pretty_name} Button 3"
+    platform: gpio
+    pin:
+      number: 16
+      mode: INPUT_PULLUP
+      inverted: True
+    # on_press:
+    #   - homeassistant.service:
+    #       service: homeassistant.turn_on
+    #       data:
+    #         entity_id: "${target_3}"
+  - name: "${pretty_name} Button 4"
+    platform: gpio
+    pin:
+      number: 17
+      mode: INPUT_PULLUP
+      inverted: True
+    # on_press:
+    #   - homeassistant.service:
+    #       service: homeassistant.turn_on
+    #       data:
+    #         entity_id: "${target_4}"
+  - name: "${pretty_name} Button 5"
+    platform: gpio
+    pin:
+      number: 18
+      mode: INPUT_PULLUP
+      inverted: True
+    # on_press:
+    #   - homeassistant.service:
+    #       service: homeassistant.turn_on
+    #       data:
+    #         entity_id: "${target_5}"
+  - name: "${pretty_name} Button 6"
+    platform: gpio
+    pin:
+      number: 19
+      mode: INPUT_PULLUP
+      inverted: True
+    # on_press:
+    #   - homeassistant.service:
+    #       service: homeassistant.turn_on
+    #       data:
+    #         entity_id: "${target_6}"
+  - name: "${pretty_name} Button 7"
+    platform: gpio
+    pin:
+      number: 23
+      mode: INPUT_PULLUP
+      inverted: True
+    # on_press:
+    #   - homeassistant.service:
+    #       service: homeassistant.turn_on
+    #       data:
+    #         entity_id: "${target_7}"
+  - name: "${pretty_name} Button 8"
+    platform: gpio
+    pin:
+      number: 25
+      mode: INPUT_PULLUP
+      inverted: True
+    # on_press:
+    #   - homeassistant.service:
+    #       service: homeassistant.turn_on
+    #       data:
+    #         entity_id: "${target_8}"
+  - name: "${pretty_name} Button 9"
+    platform: gpio
+    pin:
+      number: 26
+      mode: INPUT_PULLUP
+      inverted: True
+    # on_press:
+    #   - homeassistant.service:
+    #       service: homeassistant.turn_on
+    #       data:
+    #         entity_id: "${target_9}"
+  - name: "${pretty_name} Button 10"
+    platform: gpio
+    pin:
+      number: 27
+      mode: INPUT_PULLUP
+      inverted: True
+    # on_press:
+    #   - homeassistant.service:
+    #       service: homeassistant.turn_on
+    #       data:
+    #         entity_id: "${target_10}"
+  - name: "${pretty_name} Button 11"
+    platform: gpio
+    pin:
+      number: 32
+      mode: INPUT_PULLUP
+      inverted: True
+    # on_press:
+    #   - homeassistant.service:
+    #       service: homeassistant.turn_on
+    #       data:
+    #         entity_id: "${target_11}"
+  - name: "${pretty_name} Button 12"
+    platform: gpio
+    pin:
+      number: 33
+      mode: INPUT_PULLUP
+      inverted: True
+    # on_press:
+    #   - homeassistant.service:
+    #       service: homeassistant.turn_on
+    #       data:
+    #         entity_id: "${target_12}"
