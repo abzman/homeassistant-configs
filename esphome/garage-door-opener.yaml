@@ -1,0 +1,242 @@
+---
+substitutions:
+  id_prefix: ratgdov25e
+  uart_tx_pin: GPIO5
+  uart_rx_pin: GPIO4
+  input_obst_pin: GPIO14
+  sda_pin: GPIO12
+  scl_pin: GPIO13
+  pretty_name: Garage Door
+  friendly_name: Garage Door
+
+packages:
+  wifi: !include common/packages/wifi.yaml
+  bme_280: !include common/sensor_board_bme280.yaml
+  lux: !include common/sensor_board_lux.yaml
+
+esphome:
+  name: garage-door-opener
+  friendly_name: garage door opener
+  name_add_mac_suffix: false
+  project:
+    name: ratgdo.esphome
+    version: "2.5e"
+
+esp8266:
+  board: nodemcuv2
+  restore_from_flash: true
+
+i2c:
+  sda: ${sda_pin}
+  scl: ${scl_pin}
+
+# Enable logging
+logger:
+
+ota:
+
+improv_serial:
+
+web_server:
+
+captive_portal:
+    
+# Sync time with Home Assistant.
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+
+external_components:
+  - source:
+      type: git
+      url: https://github.com/ratgdo/esphome-ratgdo
+    refresh: 1s
+
+preferences:
+  flash_write_interval: 1min
+
+ratgdo:
+  id: ${id_prefix}
+  input_gdo_pin: ${uart_rx_pin}
+  output_gdo_pin: ${uart_tx_pin}
+  input_obst_pin: ${input_obst_pin}
+  on_sync_failed:
+    then:
+      - homeassistant.service:
+          service: persistent_notification.create
+          data:
+            title: "${friendly_name} sync failed"
+            message: "Failed to communicate with garage opener on startup."
+            notification_id: "esphome_ratgdo_${id_prefix}_sync_failed"
+api:
+  id: api_server
+# Enable Home Assistant API
+  encryption:
+    key: "X7u6fWAQidh5cfeVdscDsdf6X7V8Ddwz5j9vrmcU0bw="
+  services:
+  - service: wipe_devices_from_gdo_memory
+    variables:
+      devices_to_wipe: string
+    then:
+      - lambda: !lambda |-
+          if(devices_to_wipe.compare("all") == 0) {
+            id($id_prefix).clear_paired_devices(ratgdo::PairedDevice::ALL);
+          } else if (devices_to_wipe.compare("remote") == 0) {
+            id($id_prefix).clear_paired_devices(ratgdo::PairedDevice::REMOTE);
+          } else if (devices_to_wipe.compare("keypad") == 0) {
+            id($id_prefix).clear_paired_devices(ratgdo::PairedDevice::KEYPAD);
+          } else if (devices_to_wipe.compare("wall") == 0)  {
+            id($id_prefix).clear_paired_devices(ratgdo::PairedDevice::WALL_CONTROL);
+          } else if (devices_to_wipe.compare("accessory")  == 0) {
+            id($id_prefix).clear_paired_devices(ratgdo::PairedDevice::ACCESSORY);
+          }
+
+sensor:
+  - platform: ratgdo
+    id: ${id_prefix}_openings
+    type: openings
+    entity_category: diagnostic
+    ratgdo_id: ${id_prefix}
+    name: "Openings"
+    unit_of_measurement: "openings"
+    icon: mdi:open-in-app
+  - platform: ratgdo
+    id: ${id_prefix}_paired_devices_total
+    type: paired_devices_total
+    entity_category: diagnostic
+    ratgdo_id: ${id_prefix}
+    name: "Paired Devices"
+    icon: mdi:remote
+
+lock:
+  - platform: ratgdo
+    id: ${id_prefix}_lock_remotes
+    ratgdo_id: ${id_prefix}
+    name: "Lock remotes"
+
+switch:
+  - platform: ratgdo
+    id: "${id_prefix}_learn"
+    type: learn
+    ratgdo_id: ${id_prefix}
+    name: "Learn"
+    icon: mdi:plus-box
+    entity_category: config
+
+binary_sensor:
+  - platform: ratgdo
+    type: motion
+    id: ${id_prefix}_motion
+    ratgdo_id: ${id_prefix}
+    name: "Motion"
+    device_class: motion
+  - platform: ratgdo
+    type: obstruction
+    id: ${id_prefix}_obstruction
+    ratgdo_id: ${id_prefix}
+    name: "Obstruction"
+    device_class: problem
+  - platform: ratgdo
+    type: button
+    id: ${id_prefix}_button
+    ratgdo_id: ${id_prefix}
+    name: "Button"
+    entity_category: diagnostic
+  - platform: ratgdo
+    type: motor
+    id: ${id_prefix}_motor
+    ratgdo_id: ${id_prefix}
+    name: "Motor"
+    device_class: running
+    entity_category: diagnostic
+
+number:
+  - platform: ratgdo
+    id: ${id_prefix}_rolling_code_counter
+    type: rolling_code_counter
+    entity_category: config
+    ratgdo_id: ${id_prefix}
+    name: "Rolling code counter"
+    mode: box
+    unit_of_measurement: "codes"
+
+  - platform: ratgdo
+    id: ${id_prefix}_opening_duration
+    type: opening_duration
+    entity_category: config
+    ratgdo_id: ${id_prefix}
+    name: "Opening duration"
+    unit_of_measurement: "s"
+
+  - platform: ratgdo
+    id: ${id_prefix}_closing_duration
+    type: closing_duration
+    entity_category: config
+    ratgdo_id: ${id_prefix}
+    name: "Closing duration"
+    unit_of_measurement: "s"
+
+  - platform: ratgdo
+    id: ${id_prefix}_client_id
+    type: client_id
+    entity_category: config
+    ratgdo_id: ${id_prefix}
+    name: "Client ID"
+    mode: box
+
+cover:
+  - platform: ratgdo
+    id: ${id_prefix}_garage_door
+    device_class: garage
+    name: "Door"
+    ratgdo_id: ${id_prefix}
+
+light:
+  - platform: ratgdo
+    id: ${id_prefix}_light
+    name: "Light"
+    ratgdo_id: ${id_prefix}
+
+button:
+  - platform: restart
+    id: ${id_prefix}_restart
+    name: "Restart"
+  - platform: safe_mode
+    id: ${id_prefix}_safe_mode
+    name: "Safe mode boot"
+    entity_category: diagnostic
+
+  - platform: template
+    id: ${id_prefix}_query_status
+    entity_category: diagnostic
+    name: "Query status"
+    on_press:
+      then:
+        lambda: !lambda |-
+          id($id_prefix).query_status();
+
+  - platform: template
+    id: ${id_prefix}_query_openings
+    name: "Query openings"
+    entity_category: diagnostic
+    on_press:
+      then:
+        lambda: !lambda |-
+          id($id_prefix).query_openings();
+
+  - platform: template
+    id: ${id_prefix}_sync
+    name: "Sync"
+    entity_category: diagnostic
+    on_press:
+      then:
+        lambda: !lambda |-
+          id($id_prefix).sync();
+
+  - platform: template
+    id: ${id_prefix}_toggle_door
+    name: "Toggle door"
+    on_press:
+      then:
+        lambda: !lambda |-
+          id($id_prefix).door_toggle();
